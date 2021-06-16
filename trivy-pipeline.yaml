@@ -5,7 +5,7 @@ metadata:
 spec:
   params:
     - name: image-url
-      description: "The location of image to scan a Container Registry <server>/<namespace>/<repository>:<tag>"
+      description: "The location of image registry to scan, <server>/<namespace>/<repository>:<tag>"
       default: ""
     - name: repo-url
       description: "The URL of the repo to be scanned"
