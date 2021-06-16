@@ -1,0 +1,42 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: trivy-pipeline
+spec:
+  params:
+    - name: image-url
+      description: "The location of image to scan a Container Registry <server>/<namespace>/<repository>:<tag>"
+      default: ""
+    - name: repo-url
+      description: "The URL of the repo to be scanned"
+      default: ""
+    - name: scan-image
+      default: "false"
+    - name: scan-repo
+      default: "false"
+    - name: SKOPEO_IMAGE
+      default: quay.io/containers/skopeo:v1.1.0
+    - name: IMAGE_FROM_TLS_VERIFY
+      default: "true"
+    - name: TRIVY_IMAGE
+      default: docker.io/aquasec/trivy
+  tasks:
+    - name: image-scan
+      taskRef:
+        name: trivy-task
+      params:
+        - name: image-url
+          value: $(params.image-url)
+        - name: repo-url
+          value: $(params.repo-url)
+        - name: scan-image
+          value: $(params.scan-image)
+        - name: scan-repo
+          value: $(params.scan-repo)
+        - name: SKOPEO_IMAGE
+          value: $(params.SKOPEO_IMAGE)
+        - name: IMAGE_FROM_TLS_VERIFY
+          value: $(params.IMAGE_FROM_TLS_VERIFY)
+        - name: TRIVY_IMAGE
+          value: $(params.TRIVY_IMAGE)
+        

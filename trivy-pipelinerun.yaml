@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: trivy-pipelinerun
+spec:
+  pipelineRef:
+    name: trivy-pipeline
+  
+  params:
+  - name: image-url
+    value:  ""
+  - name: repo-url
+    value: ""
+  - name: scan-image
+    value: "false"
+  - name: scan-repo
+    value: "false"
+  - name: SKOPEO_IMAGE
+    value: quay.io/containers/skopeo:v1.1.0
+  - name: IMAGE_FROM_TLS_VERIFY
+    value: "true"
+  - name: TRIVY_IMAGE
+    value: docker.io/aquasec/trivy
+        
