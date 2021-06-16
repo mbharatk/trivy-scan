@@ -22,3 +22,5 @@ spec:
   - name: TRIVY_IMAGE
     value: docker.io/aquasec/trivy
         
+        
+        
